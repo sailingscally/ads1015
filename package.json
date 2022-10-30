@@ -1,0 +1,14 @@
+{
+  "name": "ads1015",
+  "version": "1.0.0",
+  "description": "API for the ADS1015 analog to digital converter.",
+  "main": "ads1015.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Luis Martins",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "i2c-bus": "^5.2.2"
+  }
+}
