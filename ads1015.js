@@ -20,6 +20,7 @@
  */
 
 const i2c = require('i2c-bus');
+const commons = require('r9t-commons');
 
 /**
  * Datasheet for the ADS1015 can be found at: https://cdn-shop.adafruit.com/datasheets/ads1015.pdf
@@ -92,12 +93,6 @@ const BEGIN_SINGLE_CONVERSION = 0b10000000;
 let _bus;
 let _address;
 
-const sleep = (ms) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 const open = (number) => {
   return new Promise((resolve, reject) => {
     const bus = i2c.open(number, (error) => {
@@ -167,7 +162,7 @@ const measure = async (channel, gain) => {
 
   // write two bytes to the config register, first is specific options and second is default options
   await write(CONFIG_REGISTER, [options, DEFAULT_OPTIONS]);
-  await sleep(CONVERSION_DELAY); // wait for conversion
+  await commons.sleep(CONVERSION_DELAY); // wait for conversion
 
   // read two bytes, this is a 12 bit ADC so it will need two bytes to represent the value
   const data = await read(CONVERSION_REGISTER, 2);
